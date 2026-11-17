@@ -1,0 +1,24 @@
+name: Control plane tests
+
+on:
+  pull_request:
+    paths:
+      - 'skills/directing-stickman-videos/scripts/control-plane.mjs'
+      - 'skills/directing-stickman-videos/tests/control-plane.test.mjs'
+      - '.github/workflows/control-plane-tests.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'skills/directing-stickman-videos/scripts/control-plane.mjs'
+      - 'skills/directing-stickman-videos/tests/control-plane.test.mjs'
+      - '.github/workflows/control-plane-tests.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node --test skills/directing-stickman-videos/tests/control-plane.test.mjs
